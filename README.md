@@ -61,6 +61,9 @@ You will be running your tests in one terminal and debugging in the other. As yo
 Edit the `ReadMe` file with your answers to the questions below.
 
 1. In your own words, define closure (1-2 sentences).
+
+Answer: Closuresare used in JaveScript to creat private variables and functions. It's a functionsthat will return access to a veriable inside scope even after the enclosing functionhas been returned. The function can still access and manipulate these variables even if there not in the current scope.
+
 2. Study the following code, then answer the questions below.
 
 ```js
@@ -82,9 +85,16 @@ dansRoll();
 ```
 
 a. Where is closure used in this code? How can you tell?
+
+Answer: Closures are used in this code in the 'personalDice' function. In the inner function that is returned from personalDice forms a closure over the 'name' parameter of 'personalDice'. 
+
 b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?
+
+Answer: Both return the 'name' Dan with a random number. The 'number' changes to a random number between 0 and 6 each time.
+
 c. What is the lexical scope of `newRoll`? 
 
+Answer: The lexical scope of 'newRoll' is the inner function that is returned from 'personalDice' which is the 'name' function.
 
 ### Task 3 - Stretch Goals
 

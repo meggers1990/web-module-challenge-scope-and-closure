@@ -31,10 +31,16 @@ console.log('example task:', processFirstItem(['foo','bar'],function(str){return
   
   1. What is the difference between counter1 and counter2?
   
+answer: 'Counter1' uses a closure to maintain the variable. While 'counter2' uses the global variable to do just the same.
+
   2. Which of the two uses a closure? How can you tell?
   
+answer: 'Counter1 uses closure because it declares a return function it forms a closure over the 'count' variable. It can be seen in the fact that when the 'countMaker' function returns a function which is assigned to'counter1'.
+
   3. In what scenario would the counter1 code be preferable? In what scenario would 
      counter2 be better?  
+
+     answer: Maybe if the seneriowere to have multiple independent counters with diffferent starting values it would be prefered. Since each call  to 'countMaker creates a new closure with it own variable. Then you would be able to creat as many counters as you want.. unlike 'counter2' which in a better senerio were it only needs a single global counter that is accessible from anywhere in the code.
 */
 
 // counter1 code
