@@ -40,7 +40,7 @@ answer: 'Counter1 uses closure because it declares a return function it forms a 
   3. In what scenario would the counter1 code be preferable? In what scenario would 
      counter2 be better?  
 
-     answer: Maybe if the seneriowere to have multiple independent counters with diffferent starting values it would be prefered. Since each call  to 'countMaker creates a new closure with it own variable. Then you would be able to creat as many counters as you want.. unlike 'counter2' which in a better senerio were it only needs a single global counter that is accessible from anywhere in the code.
+     answer: Maybe if the senerio were to have multiple independent counters with diffferent starting values it would be prefered. Since each call  to 'countMaker creates a new closure with it own variable. Then you would be able to creat as many counters as you want.. unlike 'counter2' which in a better senerio were it only needs a single global counter that is accessible from anywhere in the code.
 */
 
 // counter1 code
@@ -70,9 +70,20 @@ Use the inning function below to do the following:
 NOTE: This will be a callback function for the tasks below
 */
 
-function inning(/*Code Here*/){
-    /*Code Here*/
+
+//function inning() {
+ // return Math.floor(Math.random() * 3);
+//}
+
+function inning() {
+  const score = Math.floor(Math.random() * 3);
+  console.log('inning score:', score);
+  return score;
 }
+
+
+
+
 
 
 /* ⚾️⚾️⚾️ Task 3: finalScore() ⚾️⚾️⚾️
@@ -89,9 +100,21 @@ Use the finalScore function below to do the following:
 }
 */ 
 
-function finalScore(/*Code Here*/){
-  /*Code Here*/
+function finalScore(inning, numInnings) {
+  let homeScore = 0;
+  let awayScore = 0;
+
+  for (let i = 0; i < numInnings; i++) {
+    homeScore += inning();
+    awayScore += inning();
+  }
+
+  return { Home: homeScore, Away: awayScore };
 }
+
+const score = finalScore(inning, 9);
+console.log(score);
+
 
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
@@ -107,10 +130,15 @@ For example: invoking getInningScore(inning) might return this object:
   */
 
 
-function getInningScore(/*Your Code Here */) {
-  /*Your Code Here */
-
+function getInningScore(inningCallback) {
+  const scores = inningCallback();
+  return {
+    Home: scores.home,
+    Away: scores.away
+  };
 }
+
+
 
 
 /* STRETCH: ⚾️⚾️⚾️ Task 5: scoreboard() ⚾️⚾️⚾️
@@ -153,9 +181,30 @@ Use the scoreboard function below to do the following:
   "This game will require extra innings: Away 10 - Home 10"
 ] */
 // NOTE: There is no test associated with this code; if your output matches the given example, consider it complete!
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+
+function scoreboard(getInningScore, inning, numInnings) {
+  let awayScore = 0;
+  let homeScore = 0;
+  let scores = [];
+
+  for (let i = 1; i <= numInnings; i++) {
+    const inningScore = getInningScore(inning(i));
+    const awayInningScore = inningScore.away;
+    const homeInningScore = inningScore.home;
+    awayScore += awayInningScore;
+    homeScore += homeInningScore;
+    scores.push(`Inning ${i}: Away ${awayInningScore} - Home ${homeInningScore}`);
+  }
+
+  if (awayScore === homeScore) {
+    scores.push(`This game will require extra innings: Away ${awayScore} - Home ${homeScore}`);
+  } else {
+    scores.push(`Final Score: Away ${awayScore} - Home ${homeScore}`);
+  }
+
+  return scores;
 }
+
 
 
 

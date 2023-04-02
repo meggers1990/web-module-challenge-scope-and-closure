@@ -8,10 +8,4 @@ function createBase(baseNumber){
     }
 }
 const addSix = createBase(6);
-console.log(addSix(10)); 
-
-return 16;
-
-console.log createBase(addSix(21));
-
-returns 27;
+console.log(addSix(10));
